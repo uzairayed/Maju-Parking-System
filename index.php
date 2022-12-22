@@ -1,5 +1,8 @@
 <?php
 
+if(isset($_POST['majuID']))
+{
+  // echo "testing";
    $server = "localhost";
    $username = "root";
    $password = "";
@@ -11,8 +14,31 @@
       die("Connection to this database failed due to ". mysqli_connect_error());
     }
 
-    echo "S"
+    // echo "Sucessfully connected to the database";
 
+    $majuID = $_POST['majuID'];
+    $vehicleName = $_POST['vehicleName'];
+    $phoneNumber = $_POST['phoneNumber'];
+    $vehicle = $_POST['vehicle'];
+
+     
+    $sql = "INSERT INTO `mps`.`mps` (`majuID`, `vehicleName`, `phoneNumber`, `vehicle`, `dt`) VALUES ('$majuID', '$vehicleName', '$phoneNumber', '$vehicle', current_timestamp())"; 
+
+    $result = mysqli_query($con, $sql);
+
+    // echo $sql;
+
+    if($con->query($sql)==true)
+    {
+      // echo "successfully inserted";
+    }
+    else
+    {
+      echo "Error: $sql <br> $con->error";
+    }
+
+    $con->close();
+  }
 ?>
 
 
@@ -23,7 +49,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Responsive Registration Form</title>
+    <title>Maju Parking System</title>
     <meta name="viewport" content="width=device-width,
       initial-scale=1.0"/>
     <link rel="stylesheet" href="style.css" />
@@ -32,7 +58,7 @@
     
     <div class="container">
       <h1 class="form-title">MAJU Parking System</h1>
-      <form action="#">
+      <form action="index.php" method="post">
         <div class="main-user-info">
           <!-- <div class="user-input-box">
             <label for="fullName">Full Name</label>
@@ -80,9 +106,9 @@
         <div class="vehicle-details-box">
           <span class="vehicle-title">Vehicle Type</span>
           <div class="vehicle-category">
-            <input type="radio" name="vehicle" id="vehicle">
+            <input type="radio" name="vehicle" id="vehicle" value="Car">
             <label for="CAR">CAR</label>
-            <input type="radio" name="vehicle" id="vehicle">
+            <input type="radio" name="vehicle" id="vehicle" value="Bike">
             <label for="BIKE">BIKE</label>
             <!-- <input type="radio" name="gender" id="other">
             <label for="other">Other</label> -->
