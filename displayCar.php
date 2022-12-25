@@ -16,34 +16,28 @@
    echo "Sucessfully connected to the database<br>";
 }
 
-$sql = "SELECT * FROM mps";
+$sql = "SELECT * FROM `mps` WHERE `vehicle` = 'Car'";
+
 $result = mysqli_query($con, $sql);
 
 //find the number of records return
 $num = mysqli_num_rows($result); 
-echo "Total Records found: ".$num;
+echo "Total Records found(Cars) : ".$num;
 echo "<br>";
 
-//rows returned by the sql query
+$no = 1;
 
 if($num>0)
 {
-    // $row = mysqli_fetch_assoc($result);
-    // echo var_dump($row);
-    // echo "<br>";
-    // $row = mysqli_fetch_assoc($result);
-    // echo var_dump($row);
-    // echo "<br>";
-
     //using while loop
     while($row = mysqli_fetch_assoc($result))
     {
         // echo var_dump($row);
-        echo $row['Sno']. ".  Student ID : ". $row['majuID']. "  in Car " . $row['vehicleName'];
+        echo $no . ".  Student ID : ". $row['majuID']. "  in Car " . $row['vehicleName'];
         echo "<br>";
+        $no = $no+1;
     }
     
 }
-
 
 ?>
