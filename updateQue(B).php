@@ -1,5 +1,8 @@
 <?php
 
+ error_reporting (E_ALL ^ E_NOTICE);
+ error_reporting(0);
+
  $server = "localhost";
  $username = "root";
  $password = "";
@@ -15,6 +18,7 @@
 
   //  echo "Sucessfully connected to the database<br>";
 }
+
 
 $sql = "SELECT * FROM `mps` WHERE `vehicle` = 'Bike'";
 
@@ -44,6 +48,10 @@ if($num>0)
     $phoneNumber = $_POST['phoneNumber'];
     // $vehicle = $_POST['vehicle'];
 
+if(isset($Sno))
+{
+
+
     // $sql = "UPDATE `mps` SET `majuID` = '$majuID', `vehicleName` = '$vehicleName', `phoneNumber` = '$phoneNumber', `vehicle` = 'Car' WHERE `mps`.`Sno` = `$Sno`";
     $sql = "UPDATE `mps` SET `majuID` = '$majuID', `vehicleName` = '$vehicleName', `phoneNumber` = '$phoneNumber', `vehicle` = 'Bike' WHERE `mps`.`Sno` = '$Sno';";
 
@@ -54,6 +62,17 @@ if($num>0)
       echo("Successfully Updated Query at : ".$Sno);
     }
 
+    if($con->query($sql)==true)
+    {
+      // echo "successfully inserted";
+    }
+    else
+    {
+      echo "Error: $sql <br> $con->error";
+    }
+
+    $con->close();
+}
 
 ?>
 
@@ -64,12 +83,12 @@ if($num>0)
     <title>Maju Parking System</title>
     <meta name="viewport" content="width=device-width,
       initial-scale=1.0"/>
-    <link rel="stylesheet" href="queStyle.css" />
+    <link rel="stylesheet" href="queStyle(B).css" />
   </head>
   <body>
     
     <div class="container">
-      <h1 class="form-title">MPS:Update Record(Car)</h1>
+      <h1 class="form-title">MPS:Update Record(Bike)</h1>
       <form action="updateQue(B).php" method="post">
       
         <div class="main-user-info">
@@ -99,7 +118,7 @@ if($num>0)
           <span class="vehicle-title">Vehicle Type</span>
           <div class="vehicle-category">
             <input type="radio" name="vehicle" id="vehicle" value="Car">
-            <label for="CAR">CAR</label>
+            <label for="CAR">BIKE</label>
 
           </div>
           <div class="user-input-box">
@@ -115,6 +134,9 @@ if($num>0)
           <input type="submit" value="Update">
         </div>
       </form>
+      <div class="query-details" style="padding: 10px;margin: 10px;background-color:green;color:white;">
+    <p><?php echo("Query updated successfully at : ".$Sno); ?></p>
+    </div>
     </div>
   </body>
 </html>

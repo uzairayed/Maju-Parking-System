@@ -16,16 +16,6 @@ body{
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%); 
 }
 
-.submitMsg{
-
-    padding: 10px;
-    margin: 10px;
-    background-color: green;
-    color:white;
-
-    
-}
-
 .container{
     width: 100%;
     max-width: 650px;
@@ -123,6 +113,8 @@ body{
     background: rgba(56, 204, 93, 0.7);
     color: rgb(255, 255, 255);
 }
+
+
 
 @media(max-width: 600px){
     .container{

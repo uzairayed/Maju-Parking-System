@@ -1,5 +1,7 @@
 <?php
 
+error_reporting(0);
+
  $server = "localhost";
  $username = "root";
  $password = "";
@@ -53,6 +55,17 @@ if($num>0)
     {
       echo("Successfully Updated Query at : ".$Sno);
     }
+    if($con->query($sql)==true)
+    {
+      // echo "successfully inserted";
+    }
+    else
+    {
+      echo "Error: $sql <br> $con->error";
+    }
+
+    $con->close();
+  
 
 
 ?>
@@ -64,7 +77,7 @@ if($num>0)
     <title>Maju Parking System</title>
     <meta name="viewport" content="width=device-width,
       initial-scale=1.0"/>
-    <link rel="stylesheet" href="queStyle.css" />
+    <link rel="stylesheet" href="queStyle(C).css" />
   </head>
   <body>
     
@@ -115,6 +128,8 @@ if($num>0)
           <input type="submit" value="Update">
         </div>
       </form>
+      <div class="query-details" style="padding: 10px;margin: 10px;background-color:green;color:white;">
+    <p><?php echo("Query updated successfully at : ".$Sno); ?></p>
     </div>
   </body>
 </html>

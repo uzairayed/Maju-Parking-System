@@ -1,5 +1,12 @@
 <?php
 
+error_reporting (E_ALL ^ E_NOTICE);
+error_reporting(0);
+
+$insert = false;
+
+echo $insert;
+
 if(isset($_POST['majuID']))
 {
   // echo "testing";
@@ -31,6 +38,7 @@ if(isset($_POST['majuID']))
     if($con->query($sql)==true)
     {
       // echo "successfully inserted";
+      $insert = true;
     }
     else
     {
@@ -112,15 +120,19 @@ if(isset($_POST['majuID']))
             <label for="BIKE">BIKE</label>
             <!-- <input type="radio" name="gender" id="other">
             <label for="other">Other</label> -->
-
-
-            
           </div>
         </div>
         <div class="form-submit-btn">
-          <input type="submit" value="Register">
+          <input type="submit" value="Enter">
         </div>
-      </form>
+</form>
+   <?php
+
+    if($insert == true)
+{
+    echo "<center><p style='color:white;margin: 10px;padding: 10px;background-color:green'>Query Inserted Succesfully</p><center>";
+}
+    ?>
     </div>
   </body>
 </html>
