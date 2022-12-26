@@ -5,7 +5,7 @@ error_reporting(0);
 
 $insert = false;
 
-echo $insert;
+
 
 if(isset($_POST['majuID']))
 {
@@ -31,7 +31,7 @@ if(isset($_POST['majuID']))
      
     $sql = "INSERT INTO `mps`.`mps` (`majuID`, `vehicleName`, `phoneNumber`, `vehicle`, `dt`) VALUES ('$majuID', '$vehicleName', '$phoneNumber', '$vehicle', current_timestamp())"; 
 
-    $result = mysqli_query($con, $sql);
+    // $result = mysqli_query($con, $sql);
 
     // echo $sql;
 
@@ -80,6 +80,7 @@ if(isset($_POST['majuID']))
             <input type="text"
                     id="majuID"
                     name="majuID"
+                    required
                     placeholder="Enter MAJU I.D"/>
           </div>
           <div class="user-input-box">
@@ -125,6 +126,7 @@ if(isset($_POST['majuID']))
         <div class="form-submit-btn">
           <input type="submit" value="Enter">
         </div>
+        
 </form>
    <?php
 
@@ -133,6 +135,10 @@ if(isset($_POST['majuID']))
     echo "<center><p style='color:white;margin: 10px;padding: 10px;background-color:green'>Query Inserted Succesfully</p><center>";
 }
     ?>
+    <div class="form-submit-btn">
+    <a href="http://localhost/mps/admin.php">
+          <input type="submit" value="Admin Panel"></a>
+        </div>  
     </div>
   </body>
 </html>

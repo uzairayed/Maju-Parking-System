@@ -1,5 +1,7 @@
 <?php
 
+$update = false;
+
 error_reporting(0);
 
  $server = "localhost";
@@ -21,25 +23,28 @@ error_reporting(0);
 $sql = "SELECT * FROM `mps` WHERE `vehicle` = 'Car'";
 
 $result = mysqli_query($con, $sql);
+$result2 = mysqli_query($con, $sql);
+
+
 
 //find the number of records return
 $num = mysqli_num_rows($result); 
-echo "Total Records found(Cars) : ".$num;
-echo "<br>";
 
-$no = 1;
+// echo "Total Records found(Cars) : ".$num;
+// echo "<br>";
 
-if($num>0)
-{
-    //using while loop
-    while($row = mysqli_fetch_assoc($result))
-    {
-        // echo var_dump($row);
-        echo $row['Sno']. ".  Student ID : ". $row['majuID']. "  in Car " . $row['vehicleName'];
-        echo "<br>";
-        $no = $no+1;
-    }
-}
+// $no = 1;
+
+// if($num>0)
+// {
+//     //using while loop
+//     while($row = mysqli_fetch_assoc($result))
+//     {
+//         echo $row['Sno']. ".  Student ID : ". $row['majuID']. "  in Car " . $row['vehicleName'];
+//         echo "<br>";
+//         // $no = $no+1;
+//     }
+// }
     $Sno = $_POST['Sno'];
     $majuID = $_POST['majuID'];
     $vehicleName = $_POST['vehicleName'];
@@ -51,13 +56,16 @@ if($num>0)
 
     // echo $sql;
     $result = mysqli_query($con, $sql);
-    if($result)
+    if(!mysqli_affected_rows($con))
     {
-      echo("Successfully Updated Query at : ".$Sno);
+      // echo("Successfully Updated Query at : ".$Sno);
+      $update = false;
+
     }
+    else $update=true;
     if($con->query($sql)==true)
     {
-      // echo "successfully inserted";
+      // echo "successfully updated";
     }
     else
     {
@@ -127,9 +135,44 @@ if($num>0)
         <div class="form-submit-btn">
           <input type="submit" value="Update">
         </div>
+        
+        
       </form>
-      <div class="query-details" style="padding: 10px;margin: 10px;background-color:green;color:white;">
-    <p><?php echo("Query updated successfully at : ".$Sno); ?></p>
+      <?php
+    if($update == true)
+{
+    echo "<center><p style='color:white;margin: 10px;padding: 10px;background-color:green'>Query Updated Succesfully at Sno : `$Sno`</p><center>";
+}
+    ?>
     </div>
+    <div class="container">
+      <h1 class="form-title">Existing Car Records</h1>
+      <div class="records-info">
+      <?php
+
+      
+      if($num>0)
+      {
+        echo "<br>";
+
+          //using while loop
+          while($row = mysqli_fetch_assoc($result2))
+          {
+            
+              echo "Sno : ".$row['Sno']. ".  Student ID : ". $row['majuID']. "  in Car : " . $row['vehicleName'];
+              echo "<br>";
+              $no = $no+1;
+          }
+      }
+      ?>
+      </div>
+      <div class="form-submit-btn">
+    <a href="http://localhost/mps/admin.html">
+          <input type="submit" value="Admin Panel"></a>
+        </div>  
+
+      
+      
+  </div>
   </body>
 </html>

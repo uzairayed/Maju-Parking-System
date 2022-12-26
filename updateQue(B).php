@@ -1,7 +1,8 @@
 <?php
 
- error_reporting (E_ALL ^ E_NOTICE);
- error_reporting(0);
+$update = false;
+
+error_reporting(0);
 
  $server = "localhost";
  $username = "root";
@@ -19,52 +20,51 @@
   //  echo "Sucessfully connected to the database<br>";
 }
 
-
 $sql = "SELECT * FROM `mps` WHERE `vehicle` = 'Bike'";
 
 $result = mysqli_query($con, $sql);
+$result2 = mysqli_query($con, $sql);
+
+
 
 //find the number of records return
 $num = mysqli_num_rows($result); 
-echo "Total Records found(Bikes) : ".$num;
-echo "<br>";
+// echo "Total Records found(Bikes) : ".$num;
+// echo "<br>";
 
-$no = 1;
+// $no = 1;
 
-if($num>0)
-{
-    //using while loop
-    while($row = mysqli_fetch_assoc($result))
-    {
-        // echo var_dump($row);
-        echo $row['Sno']. ".  Student ID : ". $row['majuID']. "  in Car " . $row['vehicleName'];
-        echo "<br>";
-        $no = $no+1;
-    }
-}
+// if($num>0)
+// {
+//     //using while loop
+//     while($row = mysqli_fetch_assoc($result))
+//     {
+//         echo $row['Sno']. ".  Student ID : ". $row['majuID']. "  on Bike " . $row['vehicleName'];
+//         echo "<br>";
+//         // $no = $no+1;
+//     }
+// }
     $Sno = $_POST['Sno'];
     $majuID = $_POST['majuID'];
     $vehicleName = $_POST['vehicleName'];
     $phoneNumber = $_POST['phoneNumber'];
     // $vehicle = $_POST['vehicle'];
 
-if(isset($Sno))
-{
-
-
-    // $sql = "UPDATE `mps` SET `majuID` = '$majuID', `vehicleName` = '$vehicleName', `phoneNumber` = '$phoneNumber', `vehicle` = 'Car' WHERE `mps`.`Sno` = `$Sno`";
+    // $sql = "UPDATE `mps` SET `majuID` = '$majuID', `vehicleName` = '$vehicleName', `phoneNumber` = '$phoneNumber', `vehicle` = 'Bike' WHERE `mps`.`Sno` = `$Sno`";
     $sql = "UPDATE `mps` SET `majuID` = '$majuID', `vehicleName` = '$vehicleName', `phoneNumber` = '$phoneNumber', `vehicle` = 'Bike' WHERE `mps`.`Sno` = '$Sno';";
 
     // echo $sql;
     $result = mysqli_query($con, $sql);
-    if($result)
+    if(!mysqli_affected_rows($con))
     {
-      echo("Successfully Updated Query at : ".$Sno);
-    }
+      // echo("Successfully Updated Query at : ".$Sno);
+      $update = false;
 
+    }
+    else $update=true;
     if($con->query($sql)==true)
     {
-      // echo "successfully inserted";
+      // echo "successfully updated";
     }
     else
     {
@@ -72,7 +72,8 @@ if(isset($Sno))
     }
 
     $con->close();
-}
+  
+
 
 ?>
 
@@ -83,13 +84,13 @@ if(isset($Sno))
     <title>Maju Parking System</title>
     <meta name="viewport" content="width=device-width,
       initial-scale=1.0"/>
-    <link rel="stylesheet" href="queStyle(B).css" />
+    <link rel="stylesheet" href="queStyle.css" />
   </head>
   <body>
     
     <div class="container">
-      <h1 class="form-title">MPS:Update Record(Bike)</h1>
-      <form action="updateQue(B).php" method="post">
+      <h1 class="form-title">MPS:Update Record(Bikes)</h1>
+      <form action="updateQue(C).php" method="post">
       
         <div class="main-user-info">
           <div class="user-input-box">
@@ -117,8 +118,8 @@ if(isset($Sno))
         <div class="vehicle-details-box">
           <span class="vehicle-title">Vehicle Type</span>
           <div class="vehicle-category">
-            <input type="radio" name="vehicle" id="vehicle" value="Car">
-            <label for="CAR">BIKE</label>
+            <input type="radio" name="vehicle" id="vehicle" value="Bike">
+            <label for="BIKE">BIKE</label>
 
           </div>
           <div class="user-input-box">
@@ -133,10 +134,41 @@ if(isset($Sno))
         <div class="form-submit-btn">
           <input type="submit" value="Update">
         </div>
+        
       </form>
-      <div class="query-details" style="padding: 10px;margin: 10px;background-color:green;color:white;">
-    <p><?php echo("Query updated successfully at : ".$Sno); ?></p>
+      <?php
+    if($update == true)
+{
+    echo "<center><p style='color:white;margin: 10px;padding: 10px;background-color:green'>Query Updated Succesfully at Sno : `$Sno`</p><center>";
+}
+    ?>
     </div>
-    </div>
+    <div class="container">
+      <h1 class="form-title">Existing Bike Records</h1>
+      <div class="records-info">
+      <?php
+
+      
+      if($num>0)
+      {
+        echo "<br>";
+
+          //using while loop
+          while($row = mysqli_fetch_assoc($result2))
+          {
+            
+              echo "Sno : ".$row['Sno']. ".  Student ID : ". $row['majuID']. "  on Bike : " . $row['vehicleName'];
+              echo "<br>";
+              $no = $no+1;
+          }
+      }
+      ?>
+      </div>
+      <div class="form-submit-btn">
+    <a href="http://localhost/mps/admin.html">
+          <input type="submit" value="Admin Panel"></a>
+        </div>  
+      
+  </div>
   </body>
 </html>

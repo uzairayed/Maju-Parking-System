@@ -124,6 +124,29 @@ body{
     color: rgb(255, 255, 255);
 }
 
+.admin-btn input{
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 20px;
+    padding: 10px;
+    border:none;
+    border-radius: 3px;
+    color: rgb(209, 209, 209);
+    background: rgba(63, 114, 76, 0.7);
+}
+
+.admin-btn input:hover{
+    background: rgba(56, 204, 93, 0.7);
+    color: rgb(255, 255, 255);
+}
+
+.records-info{
+    color:white;
+}
+
+
+
 @media(max-width: 600px){
     .container{
         min-width: 280px;

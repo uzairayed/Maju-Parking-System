@@ -26,6 +26,7 @@ body{
     box-shadow: inset -2px 2px 2px white;
 }
 
+
 .form-title{
     font-size: 26px;
     font-weight: 600;
@@ -114,10 +115,21 @@ body{
     color: rgb(255, 255, 255);
 }
 
-.query-details{
-    padding: 10px;
-    margin: 10px;
+.container2{
+    width: 100%;
+    max-width: 650px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 28px;
+    margin: 0 28px;
+    border-radius: 10px;
+    box-shadow: inset -2px 2px 2px white;
 }
+
+.records-info{
+    color:white;
+}
+
+
 
 @media(max-width: 600px){
     .container{
