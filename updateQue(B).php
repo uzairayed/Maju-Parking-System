@@ -16,13 +16,13 @@
   //  echo "Sucessfully connected to the database<br>";
 }
 
-$sql = "SELECT * FROM `mps` WHERE `vehicle` = 'Car'";
+$sql = "SELECT * FROM `mps` WHERE `vehicle` = 'Bike'";
 
 $result = mysqli_query($con, $sql);
 
 //find the number of records return
 $num = mysqli_num_rows($result); 
-echo "Total Records found(Cars) : ".$num;
+echo "Total Records found(Bikes) : ".$num;
 echo "<br>";
 
 $no = 1;
@@ -45,7 +45,7 @@ if($num>0)
     // $vehicle = $_POST['vehicle'];
 
     // $sql = "UPDATE `mps` SET `majuID` = '$majuID', `vehicleName` = '$vehicleName', `phoneNumber` = '$phoneNumber', `vehicle` = 'Car' WHERE `mps`.`Sno` = `$Sno`";
-    $sql = "UPDATE `mps` SET `majuID` = '$majuID', `vehicleName` = '$vehicleName', `phoneNumber` = '$phoneNumber', `vehicle` = 'Car' WHERE `mps`.`Sno` = '$Sno';";
+    $sql = "UPDATE `mps` SET `majuID` = '$majuID', `vehicleName` = '$vehicleName', `phoneNumber` = '$phoneNumber', `vehicle` = 'Bike' WHERE `mps`.`Sno` = '$Sno';";
 
     // echo $sql;
     $result = mysqli_query($con, $sql);
@@ -70,7 +70,7 @@ if($num>0)
     
     <div class="container">
       <h1 class="form-title">MPS:Update Record(Car)</h1>
-      <form action="updateQue(C).php" method="post">
+      <form action="updateQue(B).php" method="post">
       
         <div class="main-user-info">
           <div class="user-input-box">
