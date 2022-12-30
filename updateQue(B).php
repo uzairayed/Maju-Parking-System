@@ -145,7 +145,7 @@ $con->close();
       ?>
         </div>
         <div class="form-submit-btn">
-            <a href="http://localhost/mps/admin.html">
+            <a href="http://localhost/mps/admin.php">
                 <input type="submit" value="Admin Panel"></a>
         </div>
 

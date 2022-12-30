@@ -11,7 +11,8 @@ $dbname = "mps";
 
 $con = mysqli_connect($server, $username, $password, $dbname);
 
-$sql = "SELECT * FROM `mps` WHERE `vehicle` = 'Car'";
+$sql = "SELECT * FROM mps";
+
 
 $result2 = mysqli_query($con, $sql);
 $num = mysqli_num_rows($result2);
@@ -94,7 +95,7 @@ if (!$con) {
          //using while loop
          while ($row = mysqli_fetch_assoc($result2)) {
 
-             echo "Sno : " . $row['Sno'] . ".  Student ID : " . $row['majuID'] . "  in Car : " . $row['vehicleName'];
+             echo "Sno : " . $row['Sno'] . ".  Student ID : " . $row['majuID'] . "  in Car/Bike : " . $row['vehicleName'];
              echo "<br>";
          }
      }
